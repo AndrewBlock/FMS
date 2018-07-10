@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="FMS.Framework.TimeTestApp.Views.UtcTimeControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FMS.Framework.TimeTestApp.Views"
+             xmlns:converters="clr-namespace:FMS.Framework.TimeTestApp.Converters"
+             mc:Ignorable="d">
+    
+    <UserControl.Resources>
+        <converters:DateTimeConverter x:Key="DateTimeConverter" />
+        <converters:IntegerConverter x:Key="IntegerConverter" />
+    </UserControl.Resources>
+    
+    <Grid Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="15" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="5" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5" />
+            <RowDefinition Height="15" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="5" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="60" />
+            <RowDefinition Height="5" />
+        </Grid.RowDefinitions>
+
+        <Calendar HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.RowSpan="5" Grid.Column="1"
+                   SelectedDate="{Binding UtcDate, Converter={StaticResource DateTimeConverter}}" />
+
+        <TextBox HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="3" MinWidth="40"
+                 TextAlignment="Center" FontSize="18" Text="{Binding UtcHour, Converter={StaticResource IntegerConverter}}" />
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="4" Text=":" FontSize="18" />
+        <TextBox HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="5" MinWidth="40"
+                 TextAlignment="Center" FontSize="18" Text="{Binding UtcMinute, Converter={StaticResource IntegerConverter}}" />
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="6" Text=":" FontSize="18" />
+        <TextBox HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="7" MinWidth="40"
+                 TextAlignment="Center" FontSize="18" Text="{Binding UtcSecond, Converter={StaticResource IntegerConverter}}" />
+
+        <ScrollBar IsEnabled="True" HorizontalAlignment="Center" VerticalAlignment="Stretch" Grid.Row="4" Grid.Column="3"
+                   Minimum="-1000" Maximum="1000" Value="{Binding HourScrollValue}" />
+        <ScrollBar IsEnabled="True" HorizontalAlignment="Center" VerticalAlignment="Stretch" Grid.Row="4" Grid.Column="5"
+                   Minimum="-1000" Maximum="1000" Value="{Binding MinuteScrollValue}" />
+        <ScrollBar IsEnabled="True" HorizontalAlignment="Center" VerticalAlignment="Stretch" Grid.Row="4" Grid.Column="7"
+                   Minimum="-1000" Maximum="1000" Value="{Binding SecondScrollValue}" />
+    </Grid>
+</UserControl>

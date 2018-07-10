@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestApps", "TestApps", "{96
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FMS.Framework.ConsoleTest", "FMS.Framework.ConsoleTest\FMS.Framework.ConsoleTest.csproj", "{2194EC9C-58AA-4794-A07E-8B9B6FA79DD7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FMS.Framework.TimeTestApp", "FMS.Framework.TimeTestApp\FMS.Framework.TimeTestApp.csproj", "{D899719D-6607-49A1-A5E2-4E35CB66B3CA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,12 +31,17 @@ Global
 		{2194EC9C-58AA-4794-A07E-8B9B6FA79DD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2194EC9C-58AA-4794-A07E-8B9B6FA79DD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2194EC9C-58AA-4794-A07E-8B9B6FA79DD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D899719D-6607-49A1-A5E2-4E35CB66B3CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D899719D-6607-49A1-A5E2-4E35CB66B3CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D899719D-6607-49A1-A5E2-4E35CB66B3CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D899719D-6607-49A1-A5E2-4E35CB66B3CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2194EC9C-58AA-4794-A07E-8B9B6FA79DD7} = {96D10F8D-B126-45D8-B5EB-20EFC9467099}
+		{D899719D-6607-49A1-A5E2-4E35CB66B3CA} = {96D10F8D-B126-45D8-B5EB-20EFC9467099}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D3ECD4E9-AF69-4BF1-A0B6-145ACA8D078E}
