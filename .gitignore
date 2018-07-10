@@ -1,0 +1,26 @@
+# Compiled Object files
+*.obj
+
+# Intermediate Build Files
+**/obj/
+**/bin/
+**/Debug/
+**/Release/
+
+# Packages
+**/packages
+
+# Local Configuration Files
+*.suo
+*.ide
+*.cache
+
+# Compiled Dynamic libraries
+*.dll
+
+# Compiled Static libraries
+*.lib
+
+# Executables
+*.exe
+*.app
