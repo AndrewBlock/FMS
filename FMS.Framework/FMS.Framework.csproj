@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2F46C892-7621-4A5B-AF33-86B10D0FA4C1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FMS.Framework</RootNamespace>
+    <AssemblyName>FMS.Framework</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Core\Date.cs" />
+    <Compile Include="Core\DateTimeBase.cs" />
+    <Compile Include="Core\DateTimeValues.cs" />
+    <Compile Include="Core\LocalDateTime.cs" />
+    <Compile Include="Core\LocalDateTimeResolver.cs" />
+    <Compile Include="Core\LunarCalendar.cs" />
+    <Compile Include="Core\Time.cs" />
+    <Compile Include="Core\TimeConverter.cs" />
+    <Compile Include="Core\TimeDuration.cs" />
+    <Compile Include="Core\TimeDurationValues.cs" />
+    <Compile Include="Core\TimeZone.cs" />
+    <Compile Include="Core\TimeZone.Static.cs" />
+    <Compile Include="Core\TimeZoneMode.cs" />
+    <Compile Include="Core\TimeZonePeriod.cs" />
+    <Compile Include="Core\TimeZoneUtils.cs" />
+    <Compile Include="Core\TziUtils.cs" />
+    <Compile Include="Core\UtcDateTime.cs" />
+    <Compile Include="Core\Weekday.cs" />
+    <Compile Include="Core\WeekdayOrdinal.cs" />
+    <Compile Include="Exceptions\AmbiguousDateTimeException.cs" />
+    <Compile Include="Exceptions\FMSException.cs" />
+    <Compile Include="Exceptions\InternalOperationException.cs" />
+    <Compile Include="Exceptions\NonExistentDateTimeException.cs" />
+    <Compile Include="Extensions\Enumerable.cs" />
+    <Compile Include="Interop\SystemTime.cs" />
+    <Compile Include="Interop\Tzi.cs" />
+    <Compile Include="Interop\WinApi.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
