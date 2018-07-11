@@ -1,4 +1,8 @@
-﻿using FMS.Framework.Core;
+﻿using System.Linq;
+using FMS.Framework.Core;
+using FMS.Framework.Recurrence;
+using FMS.Framework.Recurrence.Rules;
+using FMS.Framework.Recurrence.Transforms;
 
 namespace FMS.Framework.ConsoleTest
 {
@@ -66,6 +70,58 @@ namespace FMS.Framework.ConsoleTest
             var date1 = new Date(2011, 5, 23);
             var date2 = new Date(2015, 1, 22);
             var result = date1.CompareTo(date2);
+
+            var bcStatHolidayRules = new IRule[]
+            {
+                new YearlyMonthDateRule(1, 1),
+                new YearlyMonthDayRule(2, WeekdayOrdinal.Third, Weekday.Monday),
+                new BackupToWeekdayRule
+                (
+                    new YearlyEasterRule(),
+                    Weekday.Friday,
+                    false
+                ),
+                new YearlyEasterRule(),
+                new BackupToWeekdayRule
+                (
+                    new YearlyMonthDateRule(5, 25),
+                    Weekday.Monday,
+                    false
+                ),
+                new YearlyMonthDateRule(7, 1),
+                new YearlyMonthDayRule(8, WeekdayOrdinal.First, Weekday.Monday),
+                new YearlyMonthDayRule(9, WeekdayOrdinal.First, Weekday.Monday),
+                new YearlyMonthDayRule(10, WeekdayOrdinal.Second, Weekday.Monday),
+                new YearlyMonthDateRule(11, 11),
+                new YearlyMonthDateRule(12, 25),
+                new YearlyMonthDateRule(12, 26)
+            };
+
+            var bcStatHolidays = bcStatHolidayRules
+                .Select(holidayRule => holidayRule.ResolveDate(new Date(2018, 1, 1)))
+                .ToList();
+
+            var recurrencePattern = new RecurrencePattern
+            (
+                new Date(2018, 7, 30),
+                new WeeklyWeekdayRule
+                (
+                    new Weekday[]
+                    {
+                        Weekday.Monday,
+                        Weekday.Wednesday,
+                        Weekday.Friday
+                    },
+                    1
+                ),
+                new RecurrenceEndDate(new Date(2018, 11, 9))
+            );
+
+            var recurrenceDates = recurrencePattern.ResolveOccurrences
+            (
+                new Date(2018, 1, 1),
+                new Date(2049, 12, 31)
+            );
         }
     }
 }
