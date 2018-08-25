@@ -1,8 +1,10 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using FMS.Framework.Core;
 using FMS.Framework.Recurrence;
 using FMS.Framework.Recurrence.Rules;
 using FMS.Framework.Recurrence.Transforms;
+using FMS.Framework.Scheduling.Holidays;
 
 namespace FMS.Framework.ConsoleTest
 {
@@ -71,34 +73,124 @@ namespace FMS.Framework.ConsoleTest
             var date2 = new Date(2015, 1, 22);
             var result = date1.CompareTo(date2);
 
-            var bcStatHolidayRules = new IRule[]
+            var bcHolidayRules = new Holiday []
             {
-                new YearlyMonthDateRule(1, 1),
-                new YearlyMonthDayRule(2, WeekdayOrdinal.Third, Weekday.Monday),
-                new BackupToWeekdayRule
+                new Holiday
                 (
+                    "New Year's Day",
+                    HolidayType.Statuatory,
+                    new YearlyMonthDateRule(1, 1),
+                    HolidayObservance.NextBusinessDay
+                ),
+                new Holiday
+                (
+                    "BC Family Day",
+                    HolidayType.Statuatory,
+                    new List<(int Year, IRule rule)>
+                    {
+                        (2013, new YearlyMonthDayRule(2, WeekdayOrdinal.Second, Weekday.Monday)),
+                        (2019, new YearlyMonthDayRule(2, WeekdayOrdinal.Third, Weekday.Monday)),
+                    },
+                    HolidayObservance.OriginalDate
+                ),
+                new Holiday
+                (
+                    "Good Friday",
+                    HolidayType.Statuatory,
+                    new BackupToWeekdayRule
+                    (
+                        new YearlyEasterRule(),
+                        Weekday.Friday,
+                        false
+                    ),
+                    HolidayObservance.OriginalDate
+                ),
+                new Holiday
+                (
+                    "Easter Sunday",
+                    HolidayType.Cultural,
                     new YearlyEasterRule(),
-                    Weekday.Friday,
-                    false
+                    HolidayObservance.OriginalDate
                 ),
-                new YearlyEasterRule(),
-                new BackupToWeekdayRule
+                new Holiday
                 (
-                    new YearlyMonthDateRule(5, 25),
-                    Weekday.Monday,
-                    false
+                    "Mother's Day",
+                    HolidayType.Cultural,
+                    new YearlyMonthDayRule(5, WeekdayOrdinal.Second, Weekday.Sunday),
+                    HolidayObservance.OriginalDate
                 ),
-                new YearlyMonthDateRule(7, 1),
-                new YearlyMonthDayRule(8, WeekdayOrdinal.First, Weekday.Monday),
-                new YearlyMonthDayRule(9, WeekdayOrdinal.First, Weekday.Monday),
-                new YearlyMonthDayRule(10, WeekdayOrdinal.Second, Weekday.Monday),
-                new YearlyMonthDateRule(11, 11),
-                new YearlyMonthDateRule(12, 25),
-                new YearlyMonthDateRule(12, 26)
+                new Holiday
+                (
+                    "Victoria Day",
+                    HolidayType.Statuatory,
+                    new BackupToWeekdayRule
+                    (
+                        new YearlyMonthDateRule(5, 25),
+                        Weekday.Monday,
+                        false
+                    ),
+                    HolidayObservance.OriginalDate
+                ),
+                new Holiday
+                (
+                    "Father's Day",
+                    HolidayType.Cultural,
+                    new YearlyMonthDayRule(6, WeekdayOrdinal.Third, Weekday.Sunday),
+                    HolidayObservance.OriginalDate
+                ),
+                new Holiday
+                (
+                    "Canada Day",
+                    HolidayType.Statuatory,
+                    new YearlyMonthDateRule(7, 1),
+                    HolidayObservance.NextBusinessDay
+                ),
+                new Holiday
+                (
+                    "Civic Holiday",
+                    HolidayType.Statuatory,
+                    new YearlyMonthDayRule(8, WeekdayOrdinal.First, Weekday.Monday),
+                    HolidayObservance.OriginalDate
+                ),
+                new Holiday
+                (
+                    "Labour Day",
+                    HolidayType.Statuatory,
+                    new YearlyMonthDayRule(9, WeekdayOrdinal.First, Weekday.Monday),
+                    HolidayObservance.OriginalDate
+                ),
+                new Holiday
+                (
+                    "Thanksgiving Monday",
+                    HolidayType.Statuatory,
+                    new YearlyMonthDayRule(10, WeekdayOrdinal.Second, Weekday.Monday),
+                    HolidayObservance.OriginalDate
+                ),
+                new Holiday
+                (
+                    "Remembrance Day",
+                    HolidayType.Statuatory,
+                    new YearlyMonthDateRule(11, 11),
+                    HolidayObservance.NextBusinessDay
+                ),
+                new Holiday
+                (
+                    "Christmas Day",
+                    HolidayType.Statuatory,
+                    new YearlyMonthDateRule(12, 25),
+                    HolidayObservance.NextBusinessDay
+                ),
+                new Holiday
+                (
+                    "Boxing Day",
+                    HolidayType.Statuatory,
+                    new YearlyMonthDateRule(12, 26),
+                    HolidayObservance.NextBusinessDay
+                )
             };
 
-            var bcStatHolidays = bcStatHolidayRules
-                .Select(holidayRule => holidayRule.ResolveDate(new Date(2018, 1, 1)))
+            var bcHolidays = bcHolidayRules
+                .Select(holiday => $"{holiday.Name}: {holiday.ResolveDate(2020):dddd, MMMM d, yyyy}")
                 .ToList();
 
             var recurrencePattern = new RecurrencePattern

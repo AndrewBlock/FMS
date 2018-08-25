@@ -93,6 +93,12 @@
     <Compile Include="Recurrence\Transforms\BackupToWeekdayRule.cs" />
     <Compile Include="Recurrence\Transforms\ShiftWeekdayRule.cs" />
     <Compile Include="Recurrence\Transforms\TransformRule.cs" />
+    <Compile Include="Scheduling\BusinessSchedule.cs" />
+    <Compile Include="Scheduling\Holidays\Holiday.cs" />
+    <Compile Include="Scheduling\Holidays\HolidayObservance.cs" />
+    <Compile Include="Scheduling\Holidays\HolidayType.cs" />
+    <Compile Include="Scheduling\Holidays\IHoliday.cs" />
+    <Compile Include="Scheduling\IBusinessSchedule.cs" />
     <Compile Include="Utils\EnumUtils.cs" />
   </ItemGroup>
   <ItemGroup>
